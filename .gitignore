@@ -21,3 +21,6 @@ Desktop.ini
 # Temporary and log files
 *.log
 *.tmp
+
+# Machine Learning Processed Arrays Cache (regenerated via notebook)
+models/*.npy

@@ -10,5 +10,8 @@ plotly>=5.18.0
 # Interactive dashboard web application
 streamlit>=1.30.0
 
+# Machine learning and preprocessing
+scikit-learn>=1.4.0
+
 # Jupyter kernel interface
 ipykernel>=6.29.0
