@@ -115,6 +115,6 @@ python -m ipykernel install --user --name addis-ababa-road-safety --display-name
 
 ## 6. Author & Attribution
 
-- **Author:** YonInsights
+- **Author:** Yonatan Abrham
 - **Email:** `yo2120018@gmail.com`
 - **GitHub:** [YonInsights](https://github.com/YonInsights)

@@ -70,3 +70,4 @@ Based strictly on the verified empirical evidence, municipal authorities should 
 1. **Targeted Street Lighting Maintenance:** Prioritize rapid-response repairs for streetlights along high-speed corridors. Functional lighting is associated with reducing severe outcomes from 41.7% down to 17.5%.
 2. **Nighttime & Weekend Speed Enforcement:** Shift automated radar speed enforcement and traffic police patrols to Friday, Saturday, and Sunday nights (21:00–03:00) when fatality rates peak.
 3. **Digital Collision Reporting Standardization:** Replace paper docketing with standardized digital reporting that eliminates text `'na'` placeholders and validates category codes at the point of entry.
+
