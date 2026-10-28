@@ -7,6 +7,8 @@ matplotlib>=3.8.0
 seaborn>=0.13.0
 plotly>=5.18.0
 
+# Interactive dashboard web application
+streamlit>=1.30.0
+
 # Jupyter kernel interface
 ipykernel>=6.29.0
-
