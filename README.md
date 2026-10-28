@@ -45,12 +45,20 @@ Rather than taking data at face value or calculating naive correlations, this an
 - **Commuter Congestion Peak:** Total collision counts peak predictably during the late afternoon weekday rush hour (**17:00–18:00**, with **1,266 crashes** at 17:00).
 - **Nighttime Lethality Spike:** While 17:00 records the highest crash volume, it exhibits the **lowest severe-injury rate (14.4%)**. Conversely, between **21:00 and 02:00**, the severe-injury rate surges above **21.7%**, with fatal crash counts more than doubling relative to vehicle exposure.
 
+<p align="center">
+  <img src="reports/figures/02_hourly_severity_trends.png" alt="Volume-Severity Inversion" width="850"/>
+</p>
+
 ### 2.2. The 2.5x Street Lighting Multiplier
 Municipal lighting infrastructure plays a profound role in crash outcomes:
 - **Daylight:** 16.8% severe or fatal injury rate.
 - **Darkness with Lit Streetlights:** 17.5% severe or fatal injury rate.
 - **Darkness with Unlit Streetlights:** **41.7% severe or fatal injury rate** (nearly **2.5 times higher** than daylight).
 - **Darkness with No Streetlights:** **35.0% severe or fatal injury rate**.
+
+<p align="center">
+  <img src="reports/figures/09_lighting_conditions_severity.png" alt="Street Lighting Multiplier" width="750"/>
+</p>
 
 ### 2.3. The Weekend Fatality Disparity
 - **Friday** experiences the highest weekly volume (**2,150 collisions**), driven by end-of-week commercial traffic.
@@ -59,11 +67,19 @@ Municipal lighting infrastructure plays a profound role in crash outcomes:
   - **Saturday:** **62 fatalities** (19.1% severe rate — more than double Monday)
   - **Sunday:** **55 fatalities** (17.7% severe rate)
 
+<p align="center">
+  <img src="reports/figures/03_day_of_week_trends.png" alt="Day of Week Trends" width="850"/>
+</p>
+
 ### 2.4. Target Class Imbalance
 The police-recorded outcome variable (`Accident_severity`) exhibits severe skewness:
 - **Slight Injury:** 10,776 (82.5%)
 - **Serious Injury:** 1,976 (15.1%)
 - **Fatal injury:** 311 (2.4%)
+
+<p align="center">
+  <img src="reports/figures/01_severity_distribution.png" alt="Accident Severity Distribution" width="800"/>
+</p>
 
 ---
 
@@ -72,13 +88,15 @@ The police-recorded outcome variable (`Accident_severity`) exhibits severe skewn
 | Figure | Description | Exported Asset |
 | :--- | :--- | :--- |
 | **Figure 1** | Absolute Counts & Proportions of Accident Severity | [`reports/figures/01_severity_distribution.png`](reports/figures/01_severity_distribution.png) |
-| **Figure 2** | Dual-Axis Hourly Volume vs. Severe Injury Rate (Interactive Plotly) | [`reports/figures/02_hourly_severity_interactive.html`](reports/figures/02_hourly_severity_interactive.html) |
+| **Figure 2** | The Volume-Severity Inversion (Dual-Axis Static High-Res) | [`reports/figures/02_hourly_severity_trends.png`](reports/figures/02_hourly_severity_trends.png) |
+| **Figure 2 (Interactive)** | Dual-Axis Hourly Volume vs. Severe Injury Rate (Interactive Plotly) | [`reports/figures/02_hourly_severity_interactive.html`](reports/figures/02_hourly_severity_interactive.html) |
 | **Figure 3** | Day of Week Progression: Volume vs. Fatality Trends | [`reports/figures/03_day_of_week_trends.png`](reports/figures/03_day_of_week_trends.png) |
 | **Figure 4** | Number of Vehicles Involved vs. Casualties (Jittered Scatter Plot) | [`reports/figures/04_vehicles_vs_casualties_scatter.png`](reports/figures/04_vehicles_vs_casualties_scatter.png) |
 | **Figure 5** | Temporal Hotspot Heatmap (7 Days x 24 Hours) | [`reports/figures/05_temporal_hotspot_heatmap.png`](reports/figures/05_temporal_hotspot_heatmap.png) |
 | **Figure 6** | Casualty Distributions Across Primary Vehicle Types (Box Plot) | [`reports/figures/06_vehicle_type_casualties_boxplot.png`](reports/figures/06_vehicle_type_casualties_boxplot.png) |
 | **Figure 7** | Kernel Density of Casualties Across Severity Levels (Violin Plot) | [`reports/figures/07_severity_casualties_violinplot.png`](reports/figures/07_severity_casualties_violinplot.png) |
 | **Figure 8** | Multivariate Pair Plot (KDEs & Stratified Bivariate Scatters) | [`reports/figures/08_multivariate_pairplot.png`](reports/figures/08_multivariate_pairplot.png) |
+| **Figure 9** | The 2.5x Street Lighting Hazard Multiplier | [`reports/figures/09_lighting_conditions_severity.png`](reports/figures/09_lighting_conditions_severity.png) |
 | **Automated EDA** | Full Automated Profiling Dashboard (Standalone HTML) | [`reports/road_accident_eda_report.html`](reports/road_accident_eda_report.html) |
 | **Web Dashboard** | Real-Time Interactive Streamlit Intelligence Application | [`app.py`](app.py) |
 
@@ -88,7 +106,7 @@ The police-recorded outcome variable (`Accident_severity`) exhibits severe skewn
 
 ```text
 Addis-Ababa-Road-Safety-Analysis/
-├── Data/                 # Raw dataset (kept local and uncommitted)
+├── Data/                 # Addis Ababa police collision records (13,063 records)
 ├── docs/
 │   └── data_dictionary.md # Comprehensive 31-column data dictionary
 ├── notebooks/
@@ -97,8 +115,8 @@ Addis-Ababa-Road-Safety-Analysis/
 │   ├── 03_exploratory_data_analysis.ipynb# Full ALX Module 1 visualization suite
 │   └── 04_automated_eda.ipynb            # Automated profiling and verification
 ├── reports/
-│   ├── figures/                          # Exported high-resolution figures
-│   ├── findings_report.md                # Executive road safety findings report
+│   ├── figures/                          # Exported high-resolution figures (PNG & HTML)
+│   ├── findings_report.md                # Publication-grade executive road safety report with embedded charts
 │   └── road_accident_eda_report.html     # Automated HTML profile report
 ├── src/
 │   └── profiling.py                      # Reusable automated EDA profiling engine
