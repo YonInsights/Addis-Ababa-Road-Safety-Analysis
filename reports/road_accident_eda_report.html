@@ -1,0 +1,1852 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Addis Ababa Road Accident Data — Automated EDA</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; background-color: #f6f8fa; color: #24292e; margin: 0; padding: 24px; }
+        .container { max-width: 1200px; margin: 0 auto; }
+        .header { background: linear-gradient(135deg, #1b3a4b 0%, #006494 100%); color: white; padding: 28px; border-radius: 8px; margin-bottom: 24px; }
+        .header h1 { margin: 0 0 8px 0; font-size: 26px; }
+        .header p { margin: 0; opacity: 0.9; font-size: 14px; }
+        .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin-bottom: 24px; }
+        .card { background: white; border-radius: 6px; padding: 16px; border: 1px solid #e1e4e8; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.03); }
+        .card-title { font-size: 12px; text-transform: uppercase; color: #586069; margin-bottom: 6px; font-weight: 600; letter-spacing: 0.5px; }
+        .card-value { font-size: 26px; font-weight: bold; color: #006494; }
+        .section-title { font-size: 18px; color: #1b3a4b; margin: 28px 0 12px 0; border-bottom: 2px solid #e1e4e8; padding-bottom: 6px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Addis Ababa Road Accident Data — Automated EDA</h1>
+            <p>Automated Exploratory Data Analysis & Quality Audit | Generated with Python 3.15 Environment</p>
+        </div>
+
+        <div class="card-grid">
+            <div class="card"><div class="card-title">Total Observations</div><div class="card-value">13,063</div></div>
+            <div class="card"><div class="card-title">Total Variables</div><div class="card-value">31</div></div>
+            <div class="card"><div class="card-title">Duplicate Rows</div><div class="card-value">0</div></div>
+            <div class="card"><div class="card-title">Explicit Missing Cells</div><div class="card-value">19,774 <span style="font-size: 14px; font-weight: normal; color: #777;">(4.9%)</span></div></div>
+            <div class="card"><div class="card-title">Memory Footprint</div><div class="card-value">21.46 MB</div></div>
+            <div class="card"><div class="card-title">Variable Types</div><div class="card-value" style="font-size: 18px; line-height: 32px;"><span style="color: #2980b9;">2 Num</span> | <span style="color: #27ae60;">29 Cat</span></div></div>
+        </div>
+
+        <h2 class="section-title">Automated Data Quality & Distribution Alerts (22)</h2>
+        
+            <div style="background: #fdfefe; border-left: 4px solid #e74c3c; padding: 10px 14px; margin-bottom: 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <strong>Age_band_of_driver</strong> — <span style="background: #e74c3c; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; font-weight: bold;">Implicit Missing Values</span>
+                <div style="color: #555; margin-top: 4px; font-size: 13px;">Column contains 1,599 text placeholder missing entries (12.2%).</div>
+            </div>
+            
+            <div style="background: #fdfefe; border-left: 4px solid #3498db; padding: 10px 14px; margin-bottom: 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <strong>Drivers_gender</strong> — <span style="background: #3498db; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; font-weight: bold;">High Imbalance</span>
+                <div style="color: #555; margin-top: 4px; font-size: 13px;">Dominant category &#x27;Male&#x27; represents 92.7% of all records.</div>
+            </div>
+            
+            <div style="background: #fdfefe; border-left: 4px solid #3498db; padding: 10px 14px; margin-bottom: 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <strong>Vehicle_driver_relation</strong> — <span style="background: #3498db; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; font-weight: bold;">High Imbalance</span>
+                <div style="color: #555; margin-top: 4px; font-size: 13px;">Dominant category &#x27;Employee&#x27; represents 78.3% of all records.</div>
+            </div>
+            
+            <div style="background: #fdfefe; border-left: 4px solid #3498db; padding: 10px 14px; margin-bottom: 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <strong>Owner_of_vehicle</strong> — <span style="background: #3498db; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; font-weight: bold;">High Imbalance</span>
+                <div style="color: #555; margin-top: 4px; font-size: 13px;">Dominant category &#x27;Owner&#x27; represents 84.9% of all records.</div>
+            </div>
+            
+            <div style="background: #fdfefe; border-left: 4px solid #e74c3c; padding: 10px 14px; margin-bottom: 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <strong>Service_year_of_vehicle</strong> — <span style="background: #e74c3c; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; font-weight: bold;">High Missingness</span>
+                <div style="color: #555; margin-top: 4px; font-size: 13px;">Column has 3,990 explicit missing values (30.5%).</div>
+            </div>
+            
+            <div style="background: #fdfefe; border-left: 4px solid #e74c3c; padding: 10px 14px; margin-bottom: 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <strong>Service_year_of_vehicle</strong> — <span style="background: #e74c3c; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; font-weight: bold;">Implicit Missing Values</span>
+                <div style="color: #555; margin-top: 4px; font-size: 13px;">Column contains 3,038 text placeholder missing entries (23.3%).</div>
+            </div>
+            
+            <div style="background: #fdfefe; border-left: 4px solid #e74c3c; padding: 10px 14px; margin-bottom: 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <strong>Defect_of_vehicle</strong> — <span style="background: #e74c3c; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; font-weight: bold;">High Missingness</span>
+                <div style="color: #555; margin-top: 4px; font-size: 13px;">Column has 4,567 explicit missing values (35.0%).</div>
+            </div>
+            
+            <div style="background: #fdfefe; border-left: 4px solid #3498db; padding: 10px 14px; margin-bottom: 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <strong>Road_allignment</strong> — <span style="background: #3498db; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; font-weight: bold;">High Imbalance</span>
+                <div style="color: #555; margin-top: 4px; font-size: 13px;">Dominant category &#x27;Tangent road with flat terrain&#x27; represents 85.1% of all records.</div>
+            </div>
+            
+            <div style="background: #fdfefe; border-left: 4px solid #3498db; padding: 10px 14px; margin-bottom: 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <strong>Road_surface_type</strong> — <span style="background: #3498db; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; font-weight: bold;">High Imbalance</span>
+                <div style="color: #555; margin-top: 4px; font-size: 13px;">Dominant category &#x27;Asphalt roads&#x27; represents 91.7% of all records.</div>
+            </div>
+            
+            <div style="background: #fdfefe; border-left: 4px solid #3498db; padding: 10px 14px; margin-bottom: 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <strong>Road_surface_conditions</strong> — <span style="background: #3498db; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; font-weight: bold;">High Imbalance</span>
+                <div style="color: #555; margin-top: 4px; font-size: 13px;">Dominant category &#x27;Dry&#x27; represents 76.0% of all records.</div>
+            </div>
+            
+            <div style="background: #fdfefe; border-left: 4px solid #3498db; padding: 10px 14px; margin-bottom: 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <strong>Light_conditions</strong> — <span style="background: #3498db; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; font-weight: bold;">High Imbalance</span>
+                <div style="color: #555; margin-top: 4px; font-size: 13px;">Dominant category &#x27;Daylight&#x27; represents 71.5% of all records.</div>
+            </div>
+            
+            <div style="background: #fdfefe; border-left: 4px solid #3498db; padding: 10px 14px; margin-bottom: 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <strong>Weather_conditions</strong> — <span style="background: #3498db; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; font-weight: bold;">High Imbalance</span>
+                <div style="color: #555; margin-top: 4px; font-size: 13px;">Dominant category &#x27;Normal&#x27; represents 81.6% of all records.</div>
+            </div>
+            
+            <div style="background: #fdfefe; border-left: 4px solid #3498db; padding: 10px 14px; margin-bottom: 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <strong>Number_of_vehicles_involved</strong> — <span style="background: #3498db; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; font-weight: bold;">Potential Outliers / Extreme Values</span>
+                <div style="color: #555; margin-top: 4px; font-size: 13px;">2,068 records exceed 1.5x IQR upper threshold (Max = 7.0).</div>
+            </div>
+            
+            <div style="background: #fdfefe; border-left: 4px solid #3498db; padding: 10px 14px; margin-bottom: 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <strong>Number_of_casualties</strong> — <span style="background: #3498db; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; font-weight: bold;">Potential Outliers / Extreme Values</span>
+                <div style="color: #555; margin-top: 4px; font-size: 13px;">755 records exceed 1.5x IQR upper threshold (Max = 8.0).</div>
+            </div>
+            
+            <div style="background: #fdfefe; border-left: 4px solid #e74c3c; padding: 10px 14px; margin-bottom: 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <strong>Casualty_class</strong> — <span style="background: #e74c3c; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; font-weight: bold;">Implicit Missing Values</span>
+                <div style="color: #555; margin-top: 4px; font-size: 13px;">Column contains 4,727 text placeholder missing entries (36.2%).</div>
+            </div>
+            
+            <div style="background: #fdfefe; border-left: 4px solid #e74c3c; padding: 10px 14px; margin-bottom: 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <strong>Casualty_gender</strong> — <span style="background: #e74c3c; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; font-weight: bold;">Implicit Missing Values</span>
+                <div style="color: #555; margin-top: 4px; font-size: 13px;">Column contains 4,727 text placeholder missing entries (36.2%).</div>
+            </div>
+            
+            <div style="background: #fdfefe; border-left: 4px solid #e74c3c; padding: 10px 14px; margin-bottom: 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <strong>Age_band_of_casualty</strong> — <span style="background: #e74c3c; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; font-weight: bold;">Implicit Missing Values</span>
+                <div style="color: #555; margin-top: 4px; font-size: 13px;">Column contains 4,727 text placeholder missing entries (36.2%).</div>
+            </div>
+            
+            <div style="background: #fdfefe; border-left: 4px solid #e74c3c; padding: 10px 14px; margin-bottom: 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <strong>Work_of_casuality</strong> — <span style="background: #e74c3c; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; font-weight: bold;">High Missingness</span>
+                <div style="color: #555; margin-top: 4px; font-size: 13px;">Column has 3,382 explicit missing values (25.9%).</div>
+            </div>
+            
+            <div style="background: #fdfefe; border-left: 4px solid #e74c3c; padding: 10px 14px; margin-bottom: 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <strong>Fitness_of_casuality</strong> — <span style="background: #e74c3c; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; font-weight: bold;">High Missingness</span>
+                <div style="color: #555; margin-top: 4px; font-size: 13px;">Column has 2,795 explicit missing values (21.4%).</div>
+            </div>
+            
+            <div style="background: #fdfefe; border-left: 4px solid #3498db; padding: 10px 14px; margin-bottom: 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <strong>Fitness_of_casuality</strong> — <span style="background: #3498db; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; font-weight: bold;">High Imbalance</span>
+                <div style="color: #555; margin-top: 4px; font-size: 13px;">Dominant category &#x27;Normal&#x27; represents 78.0% of all records.</div>
+            </div>
+            
+            <div style="background: #fdfefe; border-left: 4px solid #3498db; padding: 10px 14px; margin-bottom: 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <strong>Pedestrian_movement</strong> — <span style="background: #3498db; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; font-weight: bold;">High Imbalance</span>
+                <div style="color: #555; margin-top: 4px; font-size: 13px;">Dominant category &#x27;Not a Pedestrian&#x27; represents 89.7% of all records.</div>
+            </div>
+            
+            <div style="background: #fdfefe; border-left: 4px solid #3498db; padding: 10px 14px; margin-bottom: 8px; border-radius: 4px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                <strong>Accident_severity</strong> — <span style="background: #3498db; color: white; padding: 2px 6px; border-radius: 3px; font-size: 11px; font-weight: bold;">High Imbalance</span>
+                <div style="color: #555; margin-top: 4px; font-size: 13px;">Dominant category &#x27;Slight Injury&#x27; represents 82.5% of all records.</div>
+            </div>
+            
+
+        <h2 class="section-title">Variable Profiling (31 Variables)</h2>
+        
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Time</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>1078</strong> (8.3%) | 
+                        Missing: <strong style="color: #27ae60;">0</strong> (0.0%)
+                        
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">15:30:00</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 1.0946949399066064%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">1.1%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">16:00:00</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 0.9339355431371049%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">0.9%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">18:30:00</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 0.9186251243971523%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">0.9%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">19:00:00</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 0.9186251243971523%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">0.9%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">17:00:00</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 0.8726938681772947%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">0.9%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">11:30:00</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 0.8726938681772947%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">0.9%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Day_of_week</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>7</strong> (0.1%) | 
+                        Missing: <strong style="color: #27ae60;">0</strong> (0.0%)
+                        
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Friday</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 16.45870014544898%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">16.5%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Thursday</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 15.05779683074332%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">15.1%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Wednesday</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 14.889382224603843%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">14.9%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Tuesday</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 14.376483196815432%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">14.4%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Monday</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 13.64158309729771%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">13.6%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Saturday</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 13.60330705044783%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">13.6%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Age_band_of_driver</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>5</strong> (0.0%) | 
+                        Missing: <strong style="color: #27ae60;">0</strong> (0.0%)
+                        | Text NA: <strong style="color: #e67e22;">1599</strong>
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">18-30</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 34.915409936461764%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">34.9%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">31-50</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 33.30781596876675%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">33.3%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Over 51</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 12.921993416519943%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">12.9%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Unknown</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 12.240679782592053%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">12.2%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Under 18</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 6.6141008956594955%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">6.6%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Drivers_gender</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>2</strong> (0.0%) | 
+                        Missing: <strong style="color: #27ae60;">0</strong> (0.0%)
+                        
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Male</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 92.65865421419277%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">92.7%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Female</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 7.341345785807242%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">7.3%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Educational_level</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>7</strong> (0.1%) | 
+                        Missing: <strong style="color: #e74c3c;">766</strong> (5.9%)
+                        | Text NA: <strong style="color: #e67e22;">105</strong>
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Junior high school</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 61.90767817499808%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">61.9%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Elementary school</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 17.69884406338513%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">17.7%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">High school</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 8.98721580035214%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">9.0%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">nan</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 5.863890377401821%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">5.9%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Above high school</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 3.0008420730306975%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">3.0%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Writing &amp; reading</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 1.3779376865957285%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">1.4%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Vehicle_driver_relation</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>4</strong> (0.0%) | 
+                        Missing: <strong style="color: #e74c3c;">599</strong> (4.6%)
+                        | Text NA: <strong style="color: #e67e22;">37</strong>
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Employee</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 78.30513664548725%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">78.3%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Owner</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 15.808007349000997%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">15.8%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">nan</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 4.585470412615785%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">4.6%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Other</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 1.0181428462068438%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">1.0%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Unknown</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 0.28324274668912197%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">0.3%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Driving_experience</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>7</strong> (0.1%) | 
+                        Missing: <strong style="color: #e74c3c;">876</strong> (6.7%)
+                        | Text NA: <strong style="color: #e67e22;">36</strong>
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">5-10yr</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 27.321442241445304%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">27.3%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">2-5yr</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 21.350378932863816%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">21.4%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Above 10yr</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 18.311260812983235%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">18.3%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">1-2yr</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 14.307586312485645%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">14.3%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Below 1yr</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 10.786190002296562%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">10.8%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">nan</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 6.705963408099211%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">6.7%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Type_of_vehicle</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>17</strong> (0.1%) | 
+                        Missing: <strong style="color: #e74c3c;">967</strong> (7.4%)
+                        
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Automobile</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 26.165505626578888%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">26.2%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Lorry (41?100Q)</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 17.821327413304754%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">17.8%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Other</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 9.875220087269387%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">9.9%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">nan</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 7.402587460767052%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">7.4%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Pick up upto 10Q</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 6.575824848809615%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">6.6%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Public (12 seats)</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 5.917476842991656%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">5.9%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Owner_of_vehicle</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>4</strong> (0.0%) | 
+                        Missing: <strong style="color: #e74c3c;">508</strong> (3.9%)
+                        
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Owner</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 84.89627191303683%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">84.9%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Governmental</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 8.489627191303683%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">8.5%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">nan</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 3.8888463599479444%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">3.9%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Organization</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 2.541529510832121%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">2.5%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Other</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 0.18372502487943046%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">0.2%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Service_year_of_vehicle</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>7</strong> (0.1%) | 
+                        Missing: <strong style="color: #e74c3c;">3990</strong> (30.5%)
+                        | Text NA: <strong style="color: #e67e22;">3038</strong>
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">nan</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 30.54428538620531%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">30.5%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Unknown</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 23.256526065987902%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">23.3%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">2-5yrs</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 15.187935390032917%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">15.2%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">5-10yrs</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 10.946949399066064%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">10.9%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Above 10yr</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 10.671361861746918%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">10.7%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">1-2yr</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 7.012171782898262%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">7.0%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Defect_of_vehicle</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>3</strong> (0.0%) | 
+                        Missing: <strong style="color: #e74c3c;">4567</strong> (35.0%)
+                        
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">No defect</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 63.6454107019827%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">63.6%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">nan</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 34.96134119268162%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">35.0%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">7</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 0.8956594962872235%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">0.9%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">5</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 0.4975886090484574%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">0.5%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Area_accident_occured</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>13</strong> (0.1%) | 
+                        Missing: <strong style="color: #e74c3c;">240</strong> (1.8%)
+                        
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Other</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 29.28117584015923%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">29.3%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Office areas</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 26.91571614483656%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">26.9%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Residential areas</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 16.68070121717829%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">16.7%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Church areas</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 8.405419888233943%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">8.4%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Industrial areas</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 3.65153486947868%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">3.7%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">School areas</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 3.5137411008191073%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">3.5%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Lanes_or_Medians</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>7</strong> (0.1%) | 
+                        Missing: <strong style="color: #e74c3c;">477</strong> (3.7%)
+                        | Text NA: <strong style="color: #e67e22;">62</strong>
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Two-way (divided with broken lines road marking)</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 34.884789098981855%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">34.9%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Undivided Two way</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 30.40649161754574%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">30.4%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Other</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 13.228201791318991%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">13.2%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Double carriageway (median)</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 8.091556304064916%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">8.1%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">One way</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 6.820791548648855%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">6.8%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">nan</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 3.65153486947868%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">3.7%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Road_allignment</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>11</strong> (0.1%) | 
+                        Missing: <strong style="color: #e74c3c;">144</strong> (1.1%)
+                        
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Tangent road with flat terrain</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 85.14889382224604%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">85.1%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Tangent road with mild grade and flat terrain</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 4.126157850417209%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">4.1%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Steep grade downward with mountainous terrain</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 3.3529817040496055%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">3.4%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Tangent road with mountainous terrain and</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 3.0850493761004363%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">3.1%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Gentle horizontal curve</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 1.3090408022659419%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">1.3%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">nan</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 1.1023501492765828%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">1.1%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Types_of_Junction</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>8</strong> (0.1%) | 
+                        Missing: <strong style="color: #27ae60;">0</strong> (0.0%)
+                        
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Y</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 35.07616933323126%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">35.1%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">No junction</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 30.97297711092398%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">31.0%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">+</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 18.150501416213732%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">18.2%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Other</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 10.663706652376941%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">10.7%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Out of junction</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 1.8831815050141623%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">1.9%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">O</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 1.5540075021051825%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">1.6%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Road_surface_type</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>5</strong> (0.0%) | 
+                        Missing: <strong style="color: #27ae60;">0</strong> (0.0%)
+                        
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Asphalt roads</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 91.72471867105565%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">91.7%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Earth roads</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 2.8630483043711243%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">2.9%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Other</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 2.648702442011789%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">2.6%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Gravel roads</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 2.0133200643037585%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">2.0%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Asphalt roads with some distress</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 0.7502105182576744%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">0.8%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Road_surface_conditions</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>4</strong> (0.0%) | 
+                        Missing: <strong style="color: #27ae60;">0</strong> (0.0%)
+                        
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Dry</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 76.04684988134426%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">76.0%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Wet or damp</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 23.34838857842762%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">23.3%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Snow</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 0.5817959121181964%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">0.6%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Flood over 3cm. deep</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 0.022965628109928807%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">0.0%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Light_conditions</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>4</strong> (0.0%) | 
+                        Missing: <strong style="color: #27ae60;">0</strong> (0.0%)
+                        
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Daylight</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 71.52262114368828%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">71.5%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Darkness - lights lit</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 25.94350455484957%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">25.9%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Darkness - no lighting</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 1.7071116895047078%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">1.7%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Darkness - lights unlit</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 0.8267626119574369%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">0.8%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Weather_conditions</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>9</strong> (0.1%) | 
+                        Missing: <strong style="color: #27ae60;">0</strong> (0.0%)
+                        | Text NA: <strong style="color: #e67e22;">292</strong>
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Normal</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 81.57391104646712%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">81.6%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Raining</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 11.176605680165352%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">11.2%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Other</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 2.2659419735129758%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">2.3%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Unknown</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 2.2353211360330705%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">2.2%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Cloudy</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 1.0870397305366302%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">1.1%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Windy</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 0.7502105182576744%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">0.8%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Type_of_collision</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>11</strong> (0.1%) | 
+                        Missing: <strong style="color: #e74c3c;">155</strong> (1.2%)
+                        | Text NA: <strong style="color: #e67e22;">14</strong>
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Vehicle with vehicle collision</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 69.17247186710557%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">69.2%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Collision with roadside objects</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 14.047309193906454%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">14.0%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Collision with pedestrians</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 9.706805481129908%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">9.7%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Rollover</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 3.207532726020056%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">3.2%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Collision with animals</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 1.3090408022659419%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">1.3%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">nan</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 1.1865574523463218%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">1.2%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Number_of_vehicles_involved</strong>
+                        <span style="background: #2980b9; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Numeric</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>6</strong> (0.0%) | 
+                        Missing: <strong style="color: #27ae60;">0</strong> (0.0%)
+                        
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px; margin-top: 8px;">
+                    <div style="background: #f8f9fa; padding: 6px; border-radius: 4px; text-align: center;"><small style="color: #777;">Mean</small><br><strong>2.03</strong></div>
+                    <div style="background: #f8f9fa; padding: 6px; border-radius: 4px; text-align: center;"><small style="color: #777;">Std Dev</small><br><strong>0.70</strong></div>
+                    <div style="background: #f8f9fa; padding: 6px; border-radius: 4px; text-align: center;"><small style="color: #777;">Min</small><br><strong>1</strong></div>
+                    <div style="background: #f8f9fa; padding: 6px; border-radius: 4px; text-align: center;"><small style="color: #777;">Median</small><br><strong>2</strong></div>
+                    <div style="background: #f8f9fa; padding: 6px; border-radius: 4px; text-align: center;"><small style="color: #777;">Max</small><br><strong>7</strong></div>
+                    <div style="background: #f8f9fa; padding: 6px; border-radius: 4px; text-align: center;"><small style="color: #777;">Skewness</small><br><strong>1.33</strong></div>
+                </div>
+                
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Number_of_casualties</strong>
+                        <span style="background: #2980b9; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Numeric</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>8</strong> (0.1%) | 
+                        Missing: <strong style="color: #27ae60;">0</strong> (0.0%)
+                        
+                    </div>
+                </div>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); gap: 8px; margin-top: 8px;">
+                    <div style="background: #f8f9fa; padding: 6px; border-radius: 4px; text-align: center;"><small style="color: #777;">Mean</small><br><strong>1.55</strong></div>
+                    <div style="background: #f8f9fa; padding: 6px; border-radius: 4px; text-align: center;"><small style="color: #777;">Std Dev</small><br><strong>1.01</strong></div>
+                    <div style="background: #f8f9fa; padding: 6px; border-radius: 4px; text-align: center;"><small style="color: #777;">Min</small><br><strong>1</strong></div>
+                    <div style="background: #f8f9fa; padding: 6px; border-radius: 4px; text-align: center;"><small style="color: #777;">Median</small><br><strong>1</strong></div>
+                    <div style="background: #f8f9fa; padding: 6px; border-radius: 4px; text-align: center;"><small style="color: #777;">Max</small><br><strong>8</strong></div>
+                    <div style="background: #f8f9fa; padding: 6px; border-radius: 4px; text-align: center;"><small style="color: #777;">Skewness</small><br><strong>2.37</strong></div>
+                </div>
+                
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Vehicle_movement</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>13</strong> (0.1%) | 
+                        Missing: <strong style="color: #e74c3c;">308</strong> (2.4%)
+                        | Text NA: <strong style="color: #e67e22;">118</strong>
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Going straight</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 66.63094235627345%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">66.6%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Moving Backward</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 7.969072954145295%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">8.0%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Other</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 7.188241598407716%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">7.2%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Reversing</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 4.631401668835642%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">4.6%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Turnover</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 4.026640128607517%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">4.0%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Getting off</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 2.6716680701217177%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">2.7%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Casualty_class</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>4</strong> (0.0%) | 
+                        Missing: <strong style="color: #27ae60;">0</strong> (0.0%)
+                        | Text NA: <strong style="color: #e67e22;">4727</strong>
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Driver or rider</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 40.09033147056572%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">40.1%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">na</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 36.186174691877824%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">36.2%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Pedestrian</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 13.251167419428922%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">13.3%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Passenger</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 10.472326418127535%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">10.5%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Casualty_gender</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>3</strong> (0.0%) | 
+                        Missing: <strong style="color: #27ae60;">0</strong> (0.0%)
+                        | Text NA: <strong style="color: #e67e22;">4727</strong>
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Male</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 42.402204700298554%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">42.4%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">na</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 36.186174691877824%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">36.2%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Female</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 21.41162060782362%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">21.4%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Age_band_of_casualty</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>6</strong> (0.0%) | 
+                        Missing: <strong style="color: #27ae60;">0</strong> (0.0%)
+                        | Text NA: <strong style="color: #e67e22;">4727</strong>
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">na</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 36.186174691877824%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">36.2%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">18-30</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 25.384674270841305%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">25.4%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">31-50</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 19.75809538390875%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">19.8%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Under 18</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 8.673352216183112%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">8.7%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Over 51</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 8.129832350914798%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">8.1%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">5</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 1.8678710862742098%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">1.9%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Work_of_casuality</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>7</strong> (0.1%) | 
+                        Missing: <strong style="color: #e74c3c;">3382</strong> (25.9%)
+                        | Text NA: <strong style="color: #e67e22;">20</strong>
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Driver</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 48.00581795912118%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">48.0%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">nan</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 25.88991808925974%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">25.9%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Self-employed</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 16.673046007808313%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">16.7%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Employee</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 4.516573528285998%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">4.5%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Other</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 3.666845288218633%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">3.7%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Student</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 0.8191074025874607%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">0.8%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Fitness_of_casuality</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>5</strong> (0.0%) | 
+                        Missing: <strong style="color: #e74c3c;">2795</strong> (21.4%)
+                        
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Normal</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 78.01423868942815%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">78.0%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">nan</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 21.39631018908367%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">21.4%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Deaf</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 0.15310418739952536%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">0.2%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Other</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 0.1454489780295491%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">0.1%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Blind</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 0.1454489780295491%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">0.1%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">NormalNormal</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 0.1454489780295491%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">0.1%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Pedestrian_movement</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>12</strong> (0.1%) | 
+                        Missing: <strong style="color: #27ae60;">0</strong> (0.0%)
+                        
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Not a Pedestrian</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 89.680777769272%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">89.7%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Crossing from nearside - masked by parked or statioNot a Pedestrianry vehicle</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 4.133813059787185%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">4.1%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Unknown or other</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 2.304218020362857%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">2.3%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Crossing from driver&#x27;s nearside</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 1.6994564801347318%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">1.7%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Crossing from offside - masked by  parked or statioNot a Pedestrianry vehicle</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 0.597106330858149%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">0.6%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Walking along in carriageway, facing traffic</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 0.5817959121181964%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">0.6%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Cause_of_accident</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>22</strong> (0.2%) | 
+                        Missing: <strong style="color: #27ae60;">0</strong> (0.0%)
+                        | Text NA: <strong style="color: #e67e22;">26</strong>
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">No distancing</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 18.17346704432366%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">18.2%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Changing lane to the right</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 14.468345709255148%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">14.5%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Changing lane to the left</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 11.949781826532956%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">11.9%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Driving carelessly</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 11.398606751894665%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">11.4%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">No priority to vehicle</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 9.691495062389956%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">9.7%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Moving Backward</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 9.125009569011713%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">9.1%</span>
+                    </div>
+                    </div>
+            </div>
+            
+            <div style="background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 14px; margin-bottom: 12px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #f0f2f5; padding-bottom: 6px;">
+                    <div>
+                        <strong style="font-size: 15px; color: #2c3e50;">Accident_severity</strong>
+                        <span style="background: #27ae60; color: white; padding: 2px 6px; border-radius: 3px; font-size: 10px; font-weight: bold; margin-left: 6px;">Categorical</span>
+                    </div>
+                    <div style="font-size: 12px; color: #666;">
+                        Distinct: <strong>3</strong> (0.0%) | 
+                        Missing: <strong style="color: #27ae60;">0</strong> (0.0%)
+                        
+                    </div>
+                </div>
+                <div style='margin-top: 8px;'>
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Slight Injury</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 82.49253617086427%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">82.5%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Serious Injury</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 15.126693715073108%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">15.1%</span>
+                    </div>
+                    
+                    <div style="display: flex; align-items: center; justify-content: space-between; font-size: 12px; margin-top: 4px;">
+                        <span style="width: 45%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">Fatal injury</span>
+                        <div style="width: 40%; background: #eaeded; height: 12px; border-radius: 6px; overflow: hidden; margin: 0 8px;">
+                            <div style="background: #3498db; width: 2.3807701140626194%; height: 100%;"></div>
+                        </div>
+                        <span style="width: 15%; text-align: right; color: #555;">2.4%</span>
+                    </div>
+                    </div>
+            </div>
+            
+    </div>
+</body>
+</html>
