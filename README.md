@@ -83,7 +83,29 @@ The police-recorded outcome variable (`Accident_severity`) exhibits severe skewn
 
 ---
 
-## 3. Visualizations & Figures Showcase
+## 3. Supervised Machine Learning & Cost-Sensitive Severity Prediction
+
+To transition from retrospective analysis to proactive dispatch and decision support, we developed an end-to-end supervised machine learning pipeline predicting high-severity collisions (**Class 1: Severe/Fatal** vs. **Class 0: Slight**).
+
+### 3.1. Addressing the Accuracy Paradox with Cost-Sensitive Learning
+A naive majority-class classifier achieves **82.5% accuracy** while having **0.0% recall** on life-threatening crashes. To prioritize emergency intervention, we applied **cost-sensitive sample weighting** ($w_1 \approx 2.85, w_0 \approx 0.61$), penalizing missed fatal collisions ~4.7x more severely than false alarms.
+
+### 3.2. Model Benchmark Comparison Matrix (Holdout Test Set $N=2,613$)
+
+| Model Family | Accuracy | Balanced Acc | Severe Precision | Severe Recall | Severe F1 | ROC-AUC | PR-AUC |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Dummy Majority Baseline** | 82.5% | 50.0% | 0.0% | 0.0% | 0.000 | 0.500 | 0.175 |
+| **Cost-Sensitive Logistic Regression** | 63.6% | 59.1% | 24.6% | **52.3%** | **0.334** | 0.616 | 0.276 |
+| **Balanced Random Forest (Champion)** | **76.7%** | **59.5%** | **33.2%** | 33.0% | 0.331 | **0.657** | **0.315** |
+| **HistGradientBoosting** | 71.3% | 59.1% | 27.8% | 40.3% | 0.329 | 0.632 | 0.286 |
+
+<p align="center">
+  <img src="reports/figures/10_model_evaluation_curves.png" alt="Model Evaluation Curves" width="900"/>
+</p>
+
+---
+
+## 4. Visualizations & Figures Showcase
 
 | Figure | Description | Exported Asset |
 | :--- | :--- | :--- |
@@ -97,23 +119,29 @@ The police-recorded outcome variable (`Accident_severity`) exhibits severe skewn
 | **Figure 7** | Kernel Density of Casualties Across Severity Levels (Violin Plot) | [`reports/figures/07_severity_casualties_violinplot.png`](reports/figures/07_severity_casualties_violinplot.png) |
 | **Figure 8** | Multivariate Pair Plot (KDEs & Stratified Bivariate Scatters) | [`reports/figures/08_multivariate_pairplot.png`](reports/figures/08_multivariate_pairplot.png) |
 | **Figure 9** | The 2.5x Street Lighting Hazard Multiplier | [`reports/figures/09_lighting_conditions_severity.png`](reports/figures/09_lighting_conditions_severity.png) |
+| **Figure 10** | Machine Learning Diagnostics: ROC, Precision-Recall & Confusion Matrix | [`reports/figures/10_model_evaluation_curves.png`](reports/figures/10_model_evaluation_curves.png) |
 | **Automated EDA** | Full Automated Profiling Dashboard (Standalone HTML) | [`reports/road_accident_eda_report.html`](reports/road_accident_eda_report.html) |
 | **Web Dashboard** | Real-Time Interactive Streamlit Intelligence Application | [`app.py`](app.py) |
 
 ---
 
-## 4. Repository Structure
+## 5. Repository Structure
 
 ```text
 Addis-Ababa-Road-Safety-Analysis/
 ├── Data/                 # Addis Ababa police collision records (13,063 records)
 ├── docs/
 │   └── data_dictionary.md # Comprehensive 31-column data dictionary
+├── models/
+│   ├── preprocessor.joblib           # Fitted ColumnTransformer (scaling & encoding)
+│   └── crash_severity_model.joblib   # Champion end-to-end inference pipeline (Random Forest)
 ├── notebooks/
 │   ├── 01_dataset_understanding.ipynb    # Structural schema and dimensions
 │   ├── 02_data_quality_audit.ipynb       # Missingness, outliers, and data hygiene
 │   ├── 03_exploratory_data_analysis.ipynb# Full ALX Module 1 visualization suite
-│   └── 04_automated_eda.ipynb            # Automated profiling and verification
+│   ├── 04_automated_eda.ipynb            # Automated profiling and verification
+│   ├── 05_feature_engineering_preprocessing.ipynb # Leakage-free preprocessing & stratified split
+│   └── 06_model_training_evaluation.ipynb         # Cost-sensitive classification & benchmark
 ├── reports/
 │   ├── figures/                          # Exported high-resolution figures (PNG & HTML)
 │   ├── findings_report.md                # Publication-grade executive road safety report with embedded charts
@@ -128,7 +156,7 @@ Addis-Ababa-Road-Safety-Analysis/
 
 ---
 
-## 5. Reproduction & Setup Instructions
+## 6. Reproduction & Setup Instructions
 
 To reproduce all findings, figures, and launch the dynamic web dashboard in a clean environment:
 

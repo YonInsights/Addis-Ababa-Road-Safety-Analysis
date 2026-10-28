@@ -102,7 +102,36 @@ Examining the joint distributions of hour of day, vehicle counts, and casualty c
 
 ---
 
-## 3. Data Trustworthiness & Methodological Limitations
+## 3. Predictive Machine Learning Modeling & Severe Crash Detection
+
+To transition from retrospective analysis to proactive municipal response, we developed a supervised machine learning architecture predicting collision severity ($y=1$: Severe/Fatal vs. $y=0$: Slight Injury) using 24 pre-collision environmental, vehicular, and temporal features.
+
+### 3.1. The Accuracy Paradox & Cost-Sensitive Formulation
+In an 82.5% vs. 17.5% imbalanced distribution, naive models exhibit the **Accuracy Paradox**:
+- A dummy majority-class classifier achieves **82.5% overall accuracy** but has **0.0% recall** on severe/fatal collisions.
+- To prioritize life-saving intervention, we employed **cost-sensitive learning** ($w_1 \approx 2.85, w_0 \approx 0.61$), penalizing missed fatal crashes ~4.7 times more severely than false alarms.
+
+### 3.2. Executive Model Benchmark Matrix (Holdout Test Set $N=2,613$)
+
+| Model Family | Accuracy | Balanced Acc | Severe Precision | Severe Recall | Severe F1 | ROC-AUC | PR-AUC |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **Dummy Majority Baseline** | 82.5% | 50.0% | 0.0% | 0.0% | 0.000 | 0.500 | 0.175 |
+| **Cost-Sensitive Logistic Regression** | 63.6% | 59.1% | 24.6% | **52.3%** | **0.334** | 0.616 | 0.276 |
+| **Balanced Random Forest (Champion)** | **76.7%** | **59.5%** | **33.2%** | 33.0% | 0.331 | **0.657** | **0.315** |
+| **HistGradientBoosting** | 71.3% | 59.1% | 27.8% | 40.3% | 0.329 | 0.632 | 0.286 |
+
+![Figure 10: Multi-Panel Model Evaluation Diagnostics](figures/10_model_evaluation_curves.png)
+
+### 3.3. Empirical Risk Multipliers (Odds Ratios from Logistic Regression)
+Analyzing exponentiated coefficients ($e^\beta$) confirms the primary physical and behavioral drivers of severe trauma:
+- **Market Areas:** $OR = 3.97$ ($\approx 4\times$ increase in severe collision odds compared to baseline).
+- **Pedestrian Nearside Crossings:** $OR = 1.82$ (pedestrians crossing from the driver's blind or nearside angle).
+- **Steep Mountainous Grades:** $OR = 1.77$ (gravitational acceleration and brake fade).
+- **Darkness without Streetlights:** $OR = 1.56$ (corroborating our exploratory findings on ambient lighting).
+
+---
+
+## 4. Data Trustworthiness & Methodological Limitations
 
 A core requirement of ethical data science is communicating what data *cannot* establish:
 
@@ -113,7 +142,7 @@ A core requirement of ethical data science is communicating what data *cannot* e
 
 ---
 
-## 4. Policy Recommendations for Addis Ababa City Administration
+## 5. Policy Recommendations for Addis Ababa City Administration
 
 Based strictly on the verified empirical evidence, municipal authorities should prioritize:
 
@@ -124,7 +153,7 @@ Based strictly on the verified empirical evidence, municipal authorities should 
 
 ---
 
-## 5. Artifact Reference Catalog
+## 6. Artifact Reference Catalog
 
 | Figure Code | Visualization Description | File Path |
 | :--- | :--- | :--- |
@@ -138,3 +167,4 @@ Based strictly on the verified empirical evidence, municipal authorities should 
 | **Figure 7** | Kernel Density of Casualties Across Severity Levels (Violin Plot) | [figures/07_severity_casualties_violinplot.png](figures/07_severity_casualties_violinplot.png) |
 | **Figure 8** | Multivariate Pair Plot (KDEs & Stratified Bivariate Scatters) | [figures/08_multivariate_pairplot.png](figures/08_multivariate_pairplot.png) |
 | **Figure 9** | The 2.5x Street Lighting Hazard Multiplier | [figures/09_lighting_conditions_severity.png](figures/09_lighting_conditions_severity.png) |
+| **Figure 10** | Machine Learning Multi-Panel Evaluation Diagnostics (ROC, PR, CM) | [figures/10_model_evaluation_curves.png](figures/10_model_evaluation_curves.png) |
