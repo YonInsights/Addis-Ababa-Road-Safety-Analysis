@@ -11,6 +11,7 @@ import plotly.express as px
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import streamlit as st
+import joblib
 
 # ---------------------------------------------------------
 # 1. PAGE CONFIGURATION & THEME STYLING
@@ -99,7 +100,24 @@ def load_data():
     df['Is_Severe_or_Fatal'] = df['Accident_severity'].isin(['Serious Injury', 'Fatal injury'])
     return df
 
+@st.cache_resource
+def load_ml_model():
+    base_dir = Path(__file__).resolve().parent
+    candidates = [
+        base_dir / "models" / "crash_severity_model.joblib",
+        Path("models/crash_severity_model.joblib"),
+        Path("../models/crash_severity_model.joblib")
+    ]
+    for candidate in candidates:
+        if candidate.exists():
+            try:
+                return joblib.load(candidate)
+            except Exception:
+                pass
+    return None
+
 df_raw = load_data()
+ml_model = load_ml_model()
 
 
 # ---------------------------------------------------------
@@ -207,11 +225,12 @@ st.divider()
 # ---------------------------------------------------------
 # 6. TAB NAVIGATION & INTERACTIVE VISUALIZATIONS
 # ---------------------------------------------------------
-tab1, tab2, tab3, tab4, tab5 = st.tabs([
+tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs([
     "🕒 Temporal Trends (24h & Weekly)",
     "🗺️ 7x24 Density Heatmap",
     "💡 Environmental & Streetlight Hazards",
     "🚗 Vehicle & Casualty Dynamics",
+    "🎯 ML Crash Severity Predictor",
     "📋 Data Explorer & Policy Summary"
 ])
 
@@ -418,8 +437,251 @@ with tab4:
         st.warning("No records to plot.")
 
 
-# ----------------- TAB 5: DATA EXPLORER & POLICY -----------------
+# ----------------- TAB 5: ML CRASH SEVERITY PREDICTOR -----------------
 with tab5:
+    st.subheader("🎯 Real-Time Crash Severity Intelligence")
+    st.markdown("""
+    <div class="insight-card">
+        <strong>Cost-Sensitive Decision Intelligence:</strong> This predictive module uses our champion 
+        <strong>Balanced Random Forest Pipeline</strong> (ROC-AUC: 0.657, PR-AUC: 0.315). It assigns a ~4.7x penalty 
+        to missed fatal/serious collisions to overcome the 82.5% class imbalance. Adjust environmental, vehicular, 
+        and infrastructural conditions below to estimate collision trauma risk in real time.
+    </div>
+    """, unsafe_allow_html=True)
+
+    if ml_model is None:
+        st.warning("⚠️ Machine learning model file (`models/crash_severity_model.joblib`) not found. Please run Notebook 06 to build the model.")
+    else:
+        # Scenario presets for quick testing
+        preset = st.radio(
+            "Quick Scenario Presets:",
+            options=[
+                "💡 Custom Scenario",
+                "🌙 Midnight Unlit Freight Corridor (High Risk)",
+                "☀️ Daytime Commuter Automobile (Low Risk)",
+                "🚶 Nighttime Pedestrian Crossing Conflict"
+            ],
+            horizontal=True
+        )
+
+        # Default values based on preset
+        if preset == "🌙 Midnight Unlit Freight Corridor (High Risk)":
+            def_hour, def_dow = 23, "Saturday"
+            def_light = "Darkness - lights unlit"
+            def_weather = "Raining"
+            def_road_cond = "Wet or damp"
+            def_area = "Market areas"
+            def_alignment = "Steep grade upward with mountainous terrain"
+            def_veh_type = "Lorry (41-100Q)"
+            def_ped = "Crossing from driver's nearside"
+            def_vehicles = 1
+            def_exp = "1-2yr"
+        elif preset == "☀️ Daytime Commuter Automobile (Low Risk)":
+            def_hour, def_dow = 17, "Friday"
+            def_light = "Daylight"
+            def_weather = "Normal"
+            def_road_cond = "Dry"
+            def_area = "Residential areas"
+            def_alignment = "Tangent alignment with flat terrain"
+            def_veh_type = "Automobile"
+            def_ped = "Not a Pedestrian"
+            def_vehicles = 2
+            def_exp = "5-10yr"
+        elif preset == "🚶 Nighttime Pedestrian Crossing Conflict":
+            def_hour, def_dow = 21, "Friday"
+            def_light = "Darkness - no lighting"
+            def_weather = "Normal"
+            def_road_cond = "Dry"
+            def_area = "Office areas"
+            def_alignment = "Tangent alignment with flat terrain"
+            def_veh_type = "Automobile"
+            def_ped = "Crossing from driver's nearside"
+            def_vehicles = 1
+            def_exp = "2-5yr"
+        else:
+            def_hour, def_dow = 18, "Monday"
+            def_light = "Daylight"
+            def_weather = "Normal"
+            def_road_cond = "Dry"
+            def_area = "Residential areas"
+            def_alignment = "Tangent alignment with flat terrain"
+            def_veh_type = "Automobile"
+            def_ped = "Not a Pedestrian"
+            def_vehicles = 2
+            def_exp = "2-5yr"
+
+        st.markdown("##### ⚙️ Collision Scenario Parameters")
+        c1, c2, c3 = st.columns(3)
+
+        with c1:
+            st.markdown("**1. Temporal & Environmental Context**")
+            p_hour = st.slider("Hour of Day (24-Hour Clock)", 0, 23, def_hour)
+            p_dow = st.selectbox("Day of Week", days_order, index=days_order.index(def_dow) if def_dow in days_order else 0)
+            p_light = st.selectbox(
+                "Lighting Condition",
+                ["Daylight", "Darkness - lights lit", "Darkness - lights unlit", "Darkness - no lighting"],
+                index=["Daylight", "Darkness - lights lit", "Darkness - lights unlit", "Darkness - no lighting"].index(def_light) if def_light in ["Daylight", "Darkness - lights lit", "Darkness - lights unlit", "Darkness - no lighting"] else 0
+            )
+            p_weather = st.selectbox(
+                "Weather Condition",
+                ["Normal", "Raining", "Raining and Windy", "Fog or mist", "Other", "Unknown"],
+                index=["Normal", "Raining", "Raining and Windy", "Fog or mist", "Other", "Unknown"].index(def_weather) if def_weather in ["Normal", "Raining", "Raining and Windy", "Fog or mist", "Other", "Unknown"] else 0
+            )
+            p_surface = st.selectbox(
+                "Road Surface Moisture",
+                ["Dry", "Wet or damp", "Snow", "Flood over 3cm"],
+                index=["Dry", "Wet or damp", "Snow", "Flood over 3cm"].index(def_road_cond) if def_road_cond in ["Dry", "Wet or damp", "Snow", "Flood over 3cm"] else 0
+            )
+
+        with c2:
+            st.markdown("**2. Road Geometry & Location**")
+            p_area = st.selectbox(
+                "Area Accident Occurred",
+                ["Residential areas", "Office areas", "Market areas", "School areas", "Hospital areas", "Industrial areas", "Outside rural areas", "Other"],
+                index=["Residential areas", "Office areas", "Market areas", "School areas", "Hospital areas", "Industrial areas", "Outside rural areas", "Other"].index(def_area) if def_area in ["Residential areas", "Office areas", "Market areas", "School areas", "Hospital areas", "Industrial areas", "Outside rural areas", "Other"] else 0
+            )
+            p_alignment = st.selectbox(
+                "Road Alignment & Gradient",
+                ["Tangent alignment with flat terrain", "Steep grade upward with mountainous terrain", "Steep grade downward with mountainous terrain", "Sharp reverse curve", "Gentle horizontal curve"],
+                index=["Tangent alignment with flat terrain", "Steep grade upward with mountainous terrain", "Steep grade downward with mountainous terrain", "Sharp reverse curve", "Gentle horizontal curve"].index(def_alignment) if def_alignment in ["Tangent alignment with flat terrain", "Steep grade upward with mountainous terrain", "Steep grade downward with mountainous terrain", "Sharp reverse curve", "Gentle horizontal curve"] else 0
+            )
+            p_junction = st.selectbox(
+                "Junction Geometry",
+                ["No junction", "Y Shape", "T Shape", "Cross shape", "Roundabout", "O Shape"],
+                index=0
+            )
+            p_lanes = st.selectbox(
+                "Lanes or Medians",
+                ["Two-way (divided with broken lines road marking)", "Two-way (divided with solid lines road marking)", "Undivided two-way", "One way", "other"],
+                index=0
+            )
+            p_road_type = st.selectbox(
+                "Pavement Surface Type",
+                ["Asphalt roads", "Earth roads", "Gravel roads", "other"],
+                index=0
+            )
+
+        with c3:
+            st.markdown("**3. Vehicle & Behavioral Profile**")
+            p_veh = st.selectbox(
+                "Vehicle Category",
+                ["Automobile", "Lorry (41-100Q)", "Public (> 45 seats)", "Pick up upto 10Q", "Public (12-45 seats)", "Lorry (11-40Q)", "Motorcycle", "Taxi", "other"],
+                index=["Automobile", "Lorry (41-100Q)", "Public (> 45 seats)", "Pick up upto 10Q", "Public (12-45 seats)", "Lorry (11-40Q)", "Motorcycle", "Taxi", "other"].index(def_veh_type) if def_veh_type in ["Automobile", "Lorry (41-100Q)", "Public (> 45 seats)", "Pick up upto 10Q", "Public (12-45 seats)", "Lorry (11-40Q)", "Motorcycle", "Taxi", "other"] else 0
+            )
+            p_vehicles_n = st.slider("Vehicles Involved", 1, 7, def_vehicles)
+            p_ped = st.selectbox(
+                "Pedestrian Movement",
+                ["Not a Pedestrian", "Crossing from driver's nearside", "Crossing from driver's offside", "In carriageway, statioNot a Pedestrianry - not crossing  (standing or playing) - masked by parked or statioNot a Pedestrianry vehicle", "other"],
+                index=["Not a Pedestrian", "Crossing from driver's nearside", "Crossing from driver's offside", "In carriageway, statioNot a Pedestrianry - not crossing  (standing or playing) - masked by parked or statioNot a Pedestrianry vehicle", "other"].index(def_ped) if def_ped in ["Not a Pedestrian", "Crossing from driver's nearside", "Crossing from driver's offside", "In carriageway, statioNot a Pedestrianry - not crossing  (standing or playing) - masked by parked or statioNot a Pedestrianry vehicle", "other"] else 0
+            )
+            p_exp = st.selectbox(
+                "Driver Experience",
+                ["Below 1yr", "1-2yr", "2-5yr", "5-10yr", "Above 10yr", "Unknown"],
+                index=["Below 1yr", "1-2yr", "2-5yr", "5-10yr", "Above 10yr", "Unknown"].index(def_exp) if def_exp in ["Below 1yr", "1-2yr", "2-5yr", "5-10yr", "Above 10yr", "Unknown"] else 2
+            )
+            p_driver_age = st.selectbox("Driver Age Band", ["18-30", "31-50", "Over 51", "Under 18", "Unknown"], index=0)
+            p_driver_sex = st.selectbox("Driver Gender", ["Male", "Female", "Unknown"], index=0)
+
+        # Assemble full input DataFrame with all 24 required model features
+        input_data = pd.DataFrame([{
+            'Hour': p_hour,
+            'Number_of_vehicles_involved': p_vehicles_n,
+            'Day_of_week': p_dow,
+            'Age_band_of_driver': p_driver_age,
+            'Drivers_gender': p_driver_sex,
+            'Educational_level': "Junior high school",
+            'Vehicle_driver_relation': "Employee",
+            'Driving_experience': p_exp,
+            'Type_of_vehicle': p_veh,
+            'Owner_of_vehicle': "Owner",
+            'Service_year_of_vehicle': "Unknown",
+            'Defect_of_vehicle': "No defect",
+            'Area_accident_occured': p_area,
+            'Lanes_or_Medians': p_lanes,
+            'Road_allignment': p_alignment,
+            'Types_of_Junction': p_junction,
+            'Road_surface_type': p_road_type,
+            'Road_surface_conditions': p_surface,
+            'Light_conditions': p_light,
+            'Weather_conditions': p_weather,
+            'Type_of_collision': "Vehicle with vehicle collision" if p_ped == "Not a Pedestrian" else "Collision with pedestrians",
+            'Vehicle_movement': "Going straight",
+            'Pedestrian_movement': p_ped,
+            'Cause_of_accident': "No priority to vehicle"
+        }])
+
+        st.markdown("---")
+        
+        # Real-time inference
+        prob_dist = ml_model.predict_proba(input_data)[0]
+        prob_slight = prob_dist[0]
+        prob_severe = prob_dist[1]
+
+        # Executive Prediction Card
+        st.subheader("⚡ Live Collision Severity Prediction")
+        
+        res_col1, res_col2, res_col3 = st.columns([1.2, 1, 1])
+        with res_col1:
+            if prob_severe >= 0.50:
+                st.error(f"### 🚨 HIGH TRAUMA RISK: {prob_severe:.1%}")
+                st.markdown("**Classification:** Severe or Fatal Collision Expected.")
+                risk_tier = "High"
+            elif prob_severe >= 0.25:
+                st.warning(f"### ⚠️ MODERATE TRAUMA RISK: {prob_severe:.1%}")
+                st.markdown("**Classification:** Elevated Risk (Exceeds City Baseline of 17.5%).")
+                risk_tier = "Moderate"
+            else:
+                st.success(f"### 🟢 LOW TRAUMA RISK: {prob_severe:.1%}")
+                st.markdown("**Classification:** Minor / Slight Injury Probability.")
+                risk_tier = "Low"
+
+        with res_col2:
+            diff_from_baseline = ((prob_severe - 0.1751) / 0.1751) * 100
+            st.metric("Severe / Fatal Probability", f"{prob_severe:.1%}", f"{diff_from_baseline:+.1f}% vs. baseline")
+
+        with res_col3:
+            st.metric("Slight Injury Probability", f"{prob_slight:.1%}")
+
+        # Active Risk Multipliers Analysis
+        active_factors = []
+        if "unlit" in p_light.lower() or "no lighting" in p_light.lower():
+            active_factors.append("💡 **Unlit / Missing Streetlights:** Triggers municipal 2.5x darkness severity multiplier.")
+        if p_area == "Market areas":
+            active_factors.append("🏬 **Market Area:** Highly congested pedestrian conflict zone (+3.97x severity odds).")
+        if "mountainous" in p_alignment.lower():
+            active_factors.append("⛰️ **Mountainous Gradient:** Steep elevation adds brake fatigue and acceleration risk (+1.77x odds).")
+        if p_ped != "Not a Pedestrian":
+            active_factors.append("🚶 **Pedestrian Involvement:** Direct pedestrian vulnerability significantly increases fatal injury potential.")
+        if "Lorry" in p_veh or "Public" in p_veh:
+            active_factors.append("🚛 **Heavy Freight / High-Capacity Transit:** Large kinetic mass differential and occupant exposure.")
+        if p_hour >= 21 or p_hour <= 3:
+            active_factors.append("🌙 **Late-Night Window:** High travel speeds and reduced driver alertness.")
+
+        if active_factors:
+            st.info("**Key Compound Risk Multipliers Active in this Scenario:**\n- " + "\n- ".join(active_factors))
+
+        # Model Diagnostics Expander
+        with st.expander("📊 Inspect Machine Learning Diagnostics & Model Benchmark"):
+            st.markdown("""
+            **Multi-Model Benchmark on Holdout Evaluation Set ($N=2,613$):**
+            """)
+            diag_df = pd.DataFrame([
+                {"Model": "Dummy Majority Baseline", "Accuracy": "82.5%", "Severe Recall": "0.0%", "Severe Precision": "0.0%", "ROC-AUC": "0.500", "PR-AUC": "0.175"},
+                {"Model": "Cost-Sensitive Logistic Regression", "Accuracy": "63.6%", "Severe Recall": "52.3%", "Severe Precision": "24.6%", "ROC-AUC": "0.616", "PR-AUC": "0.276"},
+                {"Model": "Balanced Random Forest (Active)", "Accuracy": "76.7%", "Severe Recall": "33.0%", "Severe Precision": "33.2%", "ROC-AUC": "0.657", "PR-AUC": "0.315"},
+                {"Model": "HistGradientBoosting", "Accuracy": "71.3%", "Severe Recall": "40.3%", "Severe Precision": "27.8%", "ROC-AUC": "0.632", "PR-AUC": "0.286"}
+            ])
+            st.table(diag_df)
+
+            curve_img = Path("reports/figures/10_model_evaluation_curves.png")
+            if not curve_img.exists():
+                curve_img = Path("../reports/figures/10_model_evaluation_curves.png")
+            if curve_img.exists():
+                st.image(str(curve_img), caption="Figure 10: Multi-Panel Model Diagnostic Curves (ROC, Precision-Recall, and Normalized Confusion Matrix)", use_container_width=True)
+
+
+# ----------------- TAB 6: DATA EXPLORER & POLICY -----------------
+with tab6:
     st.subheader("Filtered Collision Records Explorer")
     st.caption(f"Displaying {len(filtered_df):,} matching rows across selected filter parameters.")
 
