@@ -72,11 +72,26 @@ st.markdown("""
 # ---------------------------------------------------------
 @st.cache_data
 def load_data():
-    data_path = Path("Data/Addis_Ababa_city_RTA.csv")
-    if not data_path.exists():
-        data_path = Path("../Data/Addis_Ababa_city_RTA.csv")
+    base_dir = Path(__file__).resolve().parent
+    candidates = [
+        base_dir / "Data" / "Addis_Ababa_city_RTA.csv",
+        base_dir / "data" / "Addis_Ababa_city_RTA.csv",
+        Path("Data/Addis_Ababa_city_RTA.csv"),
+        Path("data/Addis_Ababa_city_RTA.csv"),
+        Path("../Data/Addis_Ababa_city_RTA.csv"),
+        Path("../data/Addis_Ababa_city_RTA.csv")
+    ]
     
-    df = pd.read_csv(data_path)
+    found_path = None
+    for candidate in candidates:
+        if candidate.exists():
+            found_path = candidate
+            break
+            
+    if not found_path:
+        raise FileNotFoundError(f"Could not locate Addis_Ababa_city_RTA.csv in any of: {[str(c) for c in candidates]}")
+    
+    df = pd.read_csv(found_path)
     # Parse hour of day
     df['Hour'] = pd.to_datetime(df['Time'], format='%H:%M:%S').dt.hour
     
@@ -434,3 +449,4 @@ with tab5:
     3. **Standardized Digital Docketing:**
        - Upgrade police reporting from paper logs to digital entry to eliminate unrecorded text placeholders (`'na'`) in casualty demographic fields.
     """)
+

@@ -12,11 +12,6 @@ __pycache__/
 # Jupyter Notebook Checkpoints
 .ipynb_checkpoints/
 
-# Raw and working datasets (ignored until license and redistribution conditions are verified)
-data/*.csv
-Data/*.csv
-*.csv
-
 # OS-generated files
 Thumbs.db
 ehthumbs.db
@@ -26,4 +21,3 @@ Desktop.ini
 # Temporary and log files
 *.log
 *.tmp
-
